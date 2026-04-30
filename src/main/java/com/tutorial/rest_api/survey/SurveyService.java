@@ -1,5 +1,7 @@
 package com.tutorial.rest_api.survey;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,9 +62,18 @@ public class SurveyService {
                 .orElse(null);
     }
 
-    public void addNewSurveyQuestion(String surveyId, Question question) {
+    public String addNewSurveyQuestion(String surveyId, Question question) {
         List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+        question.setId(getRandomId());
         questions.add(question);
+
+        return question.getId();
+    }
+
+    private String getRandomId() {
+        SecureRandom secureRandom = new SecureRandom();
+        String randomId = new BigInteger(32, secureRandom).toString();
+        return randomId;
     }
 
 }

@@ -33,6 +33,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Creating a New Survey Question (POST)
     - Hierarchical REST API Design
 
+6.  **[ID Generation and REST Best Practices](docs/id-generation-and-response-status.md)**
+    - Secure Random ID Generation
+    - ResponseEntity and 201 Created Status
+    - Dynamic Location Header with ServletUriComponentsBuilder
+
+
 
 
 

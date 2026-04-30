@@ -1,8 +1,10 @@
 package com.tutorial.rest_api.survey;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 public class SurveyResource {
 
     private final SurveyService surveyService;
-
 
     public SurveyResource(SurveyService surveyService) {
         this.surveyService = surveyService;
@@ -61,8 +63,13 @@ public class SurveyResource {
     }
 
     @PostMapping("/surveys/{surveyId}/questions")
-    public void addNewSurveyQuestion(@PathVariable String surveyId, @RequestBody Question question) {
-        surveyService.addNewSurveyQuestion(surveyId, question);
+    public ResponseEntity<Object> addNewSurveyQuestion(@PathVariable String surveyId, @RequestBody Question question) {
+        String newQuestionId = surveyService.addNewSurveyQuestion(surveyId, question);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newQuestionId)
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
 }
