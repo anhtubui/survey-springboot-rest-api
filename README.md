@@ -43,16 +43,19 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - 204 No Content Status
     - Service Logic for Resource Removal
 
-
-
-
-
+8.  **[Implementing the PUT Method](docs/updating-survey-questions.md)**
+    - Resource Replacement Pattern
+    - Request Body Binding with @RequestBody
+    - Service Logic for Question Update
 
 ---
 
 ## How to Run
+
 To run the application, use the following command in your terminal:
+
 ```bash
 ./mvnw spring-boot:run
 ```
+
 The API will be available at `http://localhost:8080`.

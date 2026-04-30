@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.server.ResponseStatusException;
@@ -81,5 +83,13 @@ public class SurveyResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/surveys/{surveyId}/questions/{questionId}")
+    public ResponseEntity<Object> updateSurveyQuestion(@PathVariable String surveyId, @PathVariable String questionId,
+            @RequestBody Question question) {
+        surveyService.updateSurveyQuestion(surveyId, questionId, question);
+        return ResponseEntity.noContent().build();
+    }
+
 }
+
 

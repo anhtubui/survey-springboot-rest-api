@@ -87,7 +87,17 @@ public class SurveyService {
         return questionId;
     }
 
+    public void updateSurveyQuestion(String surveyId, String questionId, Question question) {
+        List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+
+        Predicate<? super Question> predicate = q -> q.getId().equalsIgnoreCase(questionId);
+        questions.removeIf(predicate);
+
+        questions.add(question);
+    }
+
     private String getRandomId() {
+
         SecureRandom secureRandom = new SecureRandom();
         String randomId = new BigInteger(32, secureRandom).toString();
         return randomId;
