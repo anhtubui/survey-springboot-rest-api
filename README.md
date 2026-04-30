@@ -22,6 +22,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Handling Optional and Response Status
     - Testing the API Endpoint
 
+4.  **[HTTP Methods and Status Codes](docs/http-methods-and-status-codes.md)**
+    - Request Methods in REST API
+    - Response Status Codes in REST API
+    - Best Practices
+
+
 ---
 
 ## How to Run
