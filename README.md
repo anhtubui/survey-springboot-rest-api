@@ -112,10 +112,84 @@ public class SurveyService {
 
 ---
 
-## 4. Next Steps
+# Questionnaire REST API: Development Progress
 
-With the data models and service layer firmly in place, the foundation is ready. The next phase of development will involve:
+## 1. The Survey Resource Controller
 
-1.  **Creating the RestController**: Exposing endpoints such as `GET /surveys` and `GET /surveys/{id}/questions`.
-2.  **Request Mapping**: Linking HTTP methods to service layer functions.
-3.  **Exception Handling**: Managing scenarios where surveys or questions are not found.</Question>
+To handle incoming HTTP requests, we implement a `RestController`. This class acts as the entry point for the API, mapping specific URLs to Java methods.
+
+### Implementation of `SurveyResource`
+
+The controller uses constructor injection to access the `SurveyService`, ensuring a clean, testable architecture.
+
+```java
+@RestController
+public class SurveyResource {
+
+    private final SurveyService surveyService;
+
+    // Constructor Injection (Recommended)
+    public SurveyResource(SurveyService surveyService) {
+        this.surveyService = surveyService;
+    }
+
+    @GetMapping("/surveys")
+    public List<Survey> retrieveAllSurveys() {
+        return surveyService.retrieveAllSurveys();
+    }
+}
+```
+
+---
+
+## 2. Connecting the Layers
+
+The flow of data follows the standard Spring Boot Web MVC pattern:
+
+1.  **Request**: The client sends a `GET` request to `/surveys`.
+2.  **Controller**: `SurveyResource` receives the request and calls the `retrieveAllSurveys()` method in the Service.
+3.  **Service**: `SurveyService` returns the static list of survey data.
+4.  **Serialization**: Spring Boot uses the **Jackson** library to automatically convert the Java List into a **JSON** format.
+5.  **Response**: The client receives a JSON array containing all survey details.
+
+---
+
+## 3. Testing the Endpoint
+
+Once the application is running, you can verify the implementation by navigating to:
+`http://localhost:8080/surveys`
+
+**Expected JSON Output:**
+
+```json
+[
+  {
+    "id": "Survey1",
+    "title": "Tech Survey",
+    "description": "A survey about modern technology",
+    "questions": [
+      {
+        "id": "Q1",
+        "description": "Most popular Cloud Platform",
+        "options": ["AWS", "Azure", "Google Cloud", "Oracle"],
+        "correctAnswer": "AWS"
+      }
+    ]
+  }
+]
+```
+
+---
+
+## 4. Key Concepts Applied
+
+- **@RestController**: Combines `@Controller` and `@ResponseBody`, ensuring that data returned from methods is written directly into the HTTP response body.
+- **Plural Naming**: Following RESTful best practices by using `/surveys` instead of `/getSurveys` or `/survey`.
+- **Constructor Injection**: Promotes immutability and ensures the controller cannot be instantiated without its required dependencies.
+
+## Next Steps
+
+With the collection retrieval working, the next phase will focus on **Resource Specificity**:
+
+- Implementing **Path Variables** to retrieve a single survey by its unique ID (e.g., `/surveys/{surveyId}`).
+- Filtering questions within a specific survey.
