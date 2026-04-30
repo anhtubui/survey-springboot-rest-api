@@ -60,4 +60,9 @@ public class SurveyService {
                 .orElse(null);
     }
 
+    public void addNewSurveyQuestion(String surveyId, Question question) {
+        List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+        questions.add(question);
+    }
+
 }

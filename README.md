@@ -30,7 +30,9 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
 5.  **[Building Survey Questions APIs](docs/survey-questions-api.md)**
     - Retrieving All Questions for a Survey
     - Retrieving a Specific Question by ID
+    - Creating a New Survey Question (POST)
     - Hierarchical REST API Design
+
 
 
 

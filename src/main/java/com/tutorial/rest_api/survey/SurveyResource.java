@@ -4,14 +4,19 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class SurveyResource {
 
     private final SurveyService surveyService;
+
 
     public SurveyResource(SurveyService surveyService) {
         this.surveyService = surveyService;
@@ -53,6 +58,11 @@ public class SurveyResource {
         }
 
         return question;
+    }
+
+    @PostMapping("/surveys/{surveyId}/questions")
+    public void addNewSurveyQuestion(@PathVariable String surveyId, @RequestBody Question question) {
+        surveyService.addNewSurveyQuestion(surveyId, question);
     }
 
 }

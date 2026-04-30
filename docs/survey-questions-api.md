@@ -71,7 +71,45 @@ public Question retrieveQuestionForSurvey(String surveyId, String questionId) {
 
 ---
 
-## REST API Design Best Practices
+### Creating a New Survey Question (POST)
+The `POST` method is used to add a new question to an existing survey. This demonstrates how to capture a request body and modify in-memory data.
+
+**URL Pattern**: `/surveys/{surveyId}/questions`
+
+**Controller Implementation**:
+```java
+@PostMapping("/surveys/{surveyId}/questions")
+public void addNewSurveyQuestion(@PathVariable String surveyId, @RequestBody Question question) {
+    surveyService.addNewSurveyQuestion(surveyId, question);
+}
+```
+
+**Service Logic**:
+The service retrieves the survey's question list and adds the new question object to it.
+```java
+public void addNewSurveyQuestion(String surveyId, Question question) {
+    List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+    questions.add(question);
+}
+```
+
+### Testing with Talend API Tester
+To verify the `POST` request:
+1.  **Method**: `POST`
+2.  **URL**: `http://localhost:8080/surveys/Survey1/questions`
+3.  **Body**: (Set Type to `JSON`)
+    ```json
+    {
+      "id": "Q3",
+      "description": "Most popular JS Framework",
+      "options": ["React", "Angular", "Vue", "Svelte"],
+      "correctAnswer": "React"
+    }
+    ```
+4.  **Verification**: Send a `GET` request to `/surveys/Survey1/questions` to see the newly added question.
+
+---
+
 
 1.  **Hierarchy**: Use sub-resources to show ownership. A question belongs to a survey, so the path is `/surveys/{id}/questions`.
 2.  **Plural Naming**: Use `/surveys` and `/questions` to indicate collections.
