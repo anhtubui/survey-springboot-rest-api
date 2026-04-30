@@ -3,6 +3,7 @@ package com.tutorial.rest_api.survey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,10 @@ public class SurveyService {
     public List<Survey> retrieveAllSurveys() {
         return surveys;
     }
+
+    public Survey retrieveSurveyById(String surveyId) {
+        Predicate<? super Survey> predicate = survey -> survey.getId().equalsIgnoreCase(surveyId);
+        return surveys.stream().filter(predicate).findFirst().orElse(null);
+    }
+
 }
