@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
 public class SurveyResource {
 
@@ -33,5 +32,27 @@ public class SurveyResource {
 
         return survey;
     }
-}
 
+    @GetMapping("/surveys/{surveyId}/questions")
+    public List<Question> retrieveQuestionsForSurvey(@PathVariable String surveyId) {
+        List<Question> questions = surveyService.retrieveAllSurveyQuestions(surveyId);
+
+        if (questions == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return questions;
+    }
+
+    @GetMapping("/surveys/{surveyId}/questions/{questionId}")
+    public Question retrieveQuestionForSurvey(@PathVariable String surveyId, @PathVariable String questionId) {
+        Question question = surveyService.retrieveQuestionForSurvey(surveyId, questionId);
+
+        if (question == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return question;
+    }
+
+}

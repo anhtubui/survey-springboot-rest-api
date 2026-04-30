@@ -34,4 +34,30 @@ public class SurveyService {
         return surveys.stream().filter(predicate).findFirst().orElse(null);
     }
 
+    public List<Question> retrieveAllSurveyQuestions(String surveyId) {
+        Survey survey = retrieveSurveyById(surveyId);
+
+        if (survey == null) {
+            return null;
+        }
+
+        return survey.getQuestions();
+    }
+
+    public Question retrieveQuestionForSurvey(String surveyId, String questionId) {
+        Survey survey = retrieveSurveyById(surveyId);
+
+        if (survey == null) {
+            return null;
+        }
+
+        List<Question> questions = survey.getQuestions();
+
+        Predicate<? super Question> predicate = q -> q.getId().equalsIgnoreCase(questionId);
+        return questions.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
+    }
+
 }
