@@ -24,6 +24,11 @@ public class UserDetailsCommandLineRunner implements CommandLineRunner {
         userDetailsRepository.save(new UserDetails("anhtu", "admin"));
         userDetailsRepository.save(new UserDetails("phuongtrinh", "admin"));
         userDetailsRepository.save(new UserDetails("tranlebao", "user"));
+        userDetailsRepository.save(new UserDetails("tranhuynhi", "user"));
+        userDetailsRepository.save(new UserDetails("buihoangyen", "user"));
+        userDetailsRepository.save(new UserDetails("tranhaiha", "user"));
+        userDetailsRepository.save(new UserDetails("vongocanh", "user"));
+        userDetailsRepository.save(new UserDetails("nguyenthikimanh", "user"));
 
         List<UserDetails> users = userDetailsRepository.findAll();
         // List<UserDetails> users = userDetailsRepository.findByRole("user");

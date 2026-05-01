@@ -59,6 +59,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Performing CRUD Operations at Startup
     - SQL Query Logging and Verification
 
+11. **[Exposing REST APIs with Spring Data REST](docs/exposing-rest-apis-with-spring-data-rest.md)**
+    - Setting Up Spring Data REST
+    - Exposing and Customizing REST Endpoints
+    - Pagination, Sorting, and HATEOAS
+    - Testing the Automated API
+
 ---
 
 ## How to Run
