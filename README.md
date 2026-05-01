@@ -77,6 +77,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Strict vs Non-Strict Comparison Modes
     - Implementing Robust Assertions in Integration Tests
 
+14. **[Refining and Enhancing Integration Tests](docs/refining-integration-tests.md)**
+    - Test Structure and Cleanup
+    - Using is2xxSuccessful() for Status Validation
+    - Robust Content-Type Assertions
+    - Logical Sequence of Assertions
+
 ---
 
 ## How to Run
