@@ -1,10 +1,15 @@
 package com.tutorial.rest_api.survey;
 
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SurveyResourceIT {
@@ -15,10 +20,25 @@ public class SurveyResourceIT {
     private static String SPECIFIC_QUESTION_URL = "/surveys/Survey1/questions/Q1";
 
     @Test
-    void retrieveSpecificSurveyQuestion_basicScenario() {
+    void retrieveSpecificSurveyQuestion_basicScenario() throws JSONException {
         ResponseEntity<String> responseEntity = template.getForEntity(SPECIFIC_QUESTION_URL, String.class);
 
-        System.out.println(responseEntity.getBody());
-        System.out.println(responseEntity.getHeaders());
+        String expectedResponse = """
+                {
+                    "id": "Q1",
+                    "description": "Most popular Cloud Platform",
+                    "correctAnswer": "AWS"
+                }
+                """;
+
+        // Assert that the response status code is 200 OK
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+        // Verify that the response header contains the correct Content-Type (application/json)
+        assertEquals("application/json", responseEntity.getHeaders().get("Content-Type").get(0));
+
+        // Use JSONAssert to perform a flexible comparison of the actual response body against our expected JSON.
+        // The 'false' parameter enables non-strict mode, which ignores extra fields and formatting differences.
+        JSONAssert.assertEquals(expectedResponse, responseEntity.getBody(), false);
     }
 }

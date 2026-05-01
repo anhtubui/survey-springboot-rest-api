@@ -71,6 +71,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Using TestRestTemplate for HTTP Requests
     - Basic Test Implementation and Verification
 
+13. **[Assertions with JSONAssert](docs/assertions-with-jsonassert.md)**
+    - Challenges of Raw JSON Comparison
+    - Introduction to JSONAssert Framework
+    - Strict vs Non-Strict Comparison Modes
+    - Implementing Robust Assertions in Integration Tests
+
 ---
 
 ## How to Run
