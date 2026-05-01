@@ -48,6 +48,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Request Body Binding with @RequestBody
     - Service Logic for Question Update
 
+9.  **[Spring Data JPA and Data REST](docs/spring-data-jpa-and-data-rest.md)**
+    - JPA Setup and H2 Configuration
+    - Entity Modeling with UserDetails
+    - Automated API Creation with Data REST
+
+
 ---
 
 ## How to Run
