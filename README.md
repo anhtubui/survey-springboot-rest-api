@@ -65,6 +65,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Pagination, Sorting, and HATEOAS
     - Testing the Automated API
 
+12. **[Unit and Integration Testing](docs/unit-and-integration-testing.md)**
+    - Understanding Unit vs Integration Tests
+    - Integration Testing with @SpringBootTest
+    - Using TestRestTemplate for HTTP Requests
+    - Basic Test Implementation and Verification
+
 ---
 
 ## How to Run
