@@ -83,6 +83,11 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Robust Content-Type Assertions
     - Logical Sequence of Assertions
 
+15. **[Testing Lists of Resources](docs/testing-lists-of-resources.md)**
+    - Verifying Collections with JSONAssert
+    - Partial Array Matching
+    - Handling Generic Resource URLs
+
 ---
 
 ## How to Run
