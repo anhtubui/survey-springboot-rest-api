@@ -53,6 +53,11 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Entity Modeling with UserDetails
     - Automated API Creation with Data REST
 
+10. **[Using CommandLineRunner for Startup Operations](docs/startup-operations-with-command-line-runner.md)**
+    - Startup Logic with CommandLineRunner
+    - Constructor Injection for Repositories
+    - Performing CRUD Operations at Startup
+    - SQL Query Logging and Verification
 
 ---
 
