@@ -115,6 +115,11 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Mocking Service Methods with Argument Matchers
     - Verifying Response Status and Location Headers
 
+21. **[Securing the REST API with Spring Security](docs/securing-rest-api-with-spring-security.md)**
+    - Adding spring-boot-starter-security Dependency
+    - Default Authentication Behavior
+    - Testing Secured Endpoints (401 Unauthorized)
+
 ---
 
 ## How to Run
