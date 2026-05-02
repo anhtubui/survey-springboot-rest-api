@@ -6,6 +6,9 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,6 +28,38 @@ public class SurveyResourceIT {
 
     private static String SPECIFIC_QUESTION_URL = "/surveys/Survey1/questions/Q1";
     private static String GENERIC_QUESTIONS_URL = "/surveys/Survey1/questions";
+
+    @Test
+    void addNewSurveyQuestion_basicScenario() {
+
+        String requestBody = """
+                {
+                    "description": "Your Favorite Language",
+                    "options": ["Java", "Python", "JavaScript", "Rust"],
+                    "correctAnswer": "Java"
+                }
+                """;
+
+        // 1. Set Headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        // 2. Create HttpEntity
+        HttpEntity<String> httpEntity = new HttpEntity<>(requestBody, headers);
+
+        // 3. Send POST Request
+        ResponseEntity<String> responseEntity = template.exchange(GENERIC_QUESTIONS_URL, HttpMethod.POST, httpEntity,
+                String.class);
+
+        // 4. Assertions
+        // Verify 201 Created status
+        assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+
+        // Verify Location header
+        String location = responseEntity.getHeaders().get("Location").get(0);
+        assertTrue(location.contains("/surveys/Survey1/questions/"));
+    }
 
     @Test
     void retrieveAllSurveyQuestions_basicScenario() throws JSONException {

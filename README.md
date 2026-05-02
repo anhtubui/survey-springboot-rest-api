@@ -88,6 +88,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Partial Array Matching
     - Handling Generic Resource URLs
 
+16. **[Integration Testing the POST Method](docs/integration-testing-post-method.md)**
+    - Setting Up POST Requests with HttpEntity
+    - Handling Request Headers and JSON Body
+    - Asserting 201 Created and Location Headers
+    - Managing State in Integration Tests
+
 ---
 
 ## How to Run
