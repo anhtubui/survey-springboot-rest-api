@@ -120,6 +120,12 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Default Authentication Behavior
     - Testing Secured Endpoints (401 Unauthorized)
 
+22. **[Customizing Spring Security Configuration](docs/customizing-spring-security-configuration.md)**
+    - Configuring InMemoryUserDetailsManager with BCrypt
+    - Defining Custom Security Filter Chain
+    - Enabling Basic Auth and Disabling CSRF
+    - Supporting H2 Console with FrameOptions
+
 ---
 
 ## How to Run
