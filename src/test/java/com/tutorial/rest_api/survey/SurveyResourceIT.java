@@ -31,6 +31,7 @@ public class SurveyResourceIT {
     private static String GENERIC_QUESTIONS_URL = "/surveys/Survey1/questions";
 
     // Reference: docs/integration-testing-post-method.md
+    // Reference: docs/avoiding-side-effects-in-tests.md
     @Test
     void addNewSurveyQuestion_basicScenario() {
 
@@ -61,6 +62,9 @@ public class SurveyResourceIT {
         // Verify Location header
         String location = responseEntity.getHeaders().get("Location").get(0);
         assertTrue(location.contains("/surveys/Survey1/questions/"));
+
+        // 5. Cleanup (Avoid Side Effects)
+        template.delete(location);
     }
 
     // Reference: docs/testing-lists-of-resources.md

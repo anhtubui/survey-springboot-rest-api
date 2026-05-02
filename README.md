@@ -94,6 +94,11 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Asserting 201 Created and Location Headers
     - Managing State in Integration Tests
 
+17. **[Avoiding Side Effects in Tests](docs/avoiding-side-effects-in-tests.md)**
+    - Understanding Side Effects in Integration Testing
+    - Implementing Cleanup with DELETE Requests
+    - Ensuring Test Idempotency and Isolation
+
 ---
 
 ## How to Run
