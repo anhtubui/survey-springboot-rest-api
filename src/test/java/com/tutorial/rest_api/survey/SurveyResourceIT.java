@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// Reference: docs/unit-and-integration-testing.md
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SurveyResourceIT {
 
@@ -29,6 +30,7 @@ public class SurveyResourceIT {
     private static String SPECIFIC_QUESTION_URL = "/surveys/Survey1/questions/Q1";
     private static String GENERIC_QUESTIONS_URL = "/surveys/Survey1/questions";
 
+    // Reference: docs/integration-testing-post-method.md
     @Test
     void addNewSurveyQuestion_basicScenario() {
 
@@ -61,6 +63,7 @@ public class SurveyResourceIT {
         assertTrue(location.contains("/surveys/Survey1/questions/"));
     }
 
+    // Reference: docs/testing-lists-of-resources.md
     @Test
     void retrieveAllSurveyQuestions_basicScenario() throws JSONException {
         ResponseEntity<String> responseEntity = template.getForEntity(GENERIC_QUESTIONS_URL, String.class);
@@ -78,6 +81,8 @@ public class SurveyResourceIT {
         JSONAssert.assertEquals(expectedResponse, responseEntity.getBody(), false);
     }
 
+    // Reference: docs/assertions-with-jsonassert.md
+    // Reference: docs/refining-integration-tests.md
     @Test
     void retrieveSpecificSurveyQuestion_basicScenario() throws JSONException {
         ResponseEntity<String> responseEntity = template.getForEntity(SPECIFIC_QUESTION_URL, String.class);
