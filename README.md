@@ -105,6 +105,11 @@ Welcome to the Questionnaire REST API project. This documentation is split into 
     - Mocking Dependencies with @MockBean
     - Simulating Requests with MockMvc
 
+19. **[Mocking Service Methods in Unit Tests](docs/mocking-service-methods-in-unit-tests.md)**
+    - Stubbing Service Logic with Mockito
+    - Controlling Test Scenarios with when().thenReturn()
+    - Asserting HTTP Status and JSON Content in Unit Tests
+
 ---
 
 ## How to Run
