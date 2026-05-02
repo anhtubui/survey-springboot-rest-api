@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 // Reference: docs/unit-testing-with-webmvctest.md
@@ -26,6 +30,37 @@ public class SurveyResourceTest {
     private SurveyService surveyService;
 
     private static String SPECIFIC_QUESTION_URL = "/surveys/Survey1/questions/Q1";
+    private static String GENERIC_QUESTIONS_URL = "/surveys/Survey1/questions";
+
+    // Reference: docs/unit-testing-post-method.md
+    @Test
+    void addNewSurveyQuestion_basicScenario() throws Exception {
+
+        String requestBody = """
+                {
+                    "description": "Your Favorite Language",
+                    "options": ["Java", "Python", "JavaScript", "Rust"],
+                    "correctAnswer": "Java"
+                }
+                """;
+
+        // Stub the service to return a dummy ID
+        when(surveyService.addNewSurveyQuestion(anyString(), any(Question.class))).thenReturn("SOME_ID");
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(GENERIC_QUESTIONS_URL)
+                .accept(MediaType.APPLICATION_JSON).content(requestBody).contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+
+        MockHttpServletResponse response = mvcResult.getResponse();
+
+        // Verify 201 Created
+        assertEquals(201, response.getStatus());
+
+        // Verify Location header contains the mocked ID
+        String location = response.getHeader("Location");
+        assertTrue(location.contains("/surveys/Survey1/questions/SOME_ID"));
+    }
 
     @Test
     void retrieveSpecificSurveyQuestion_404Scenario() throws Exception {
